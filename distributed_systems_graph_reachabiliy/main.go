@@ -34,3 +34,61 @@
 // - Service names are non-empty strings with max length 50
 // - The graph may contain cycles
 // - Source and target services may or may not exist in the graph
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func solution(dependencies map[string][]string, source string, target string) bool {
+	// Your implementation will go here.
+	return false
+}
+
+func main() {
+	testCases := []struct {
+		name         string
+		dependencies map[string][]string
+		source       string
+		target       string
+		expected     bool
+	}{
+		{
+			name:         "Example 1",
+			dependencies: map[string][]string{"api": {"db", "cache"}, "db": {"storage"}, "cache": {"storage"}, "storage": {}},
+			source:       "api",
+			target:       "storage",
+			expected:     true,
+		},
+		{
+			name:         "Example 2",
+			dependencies: map[string][]string{"service_a": {"service_b"}, "service_b": {"service_c"}, "service_c": {}},
+			source:       "service_a",
+			target:       "service_d",
+			expected:     false,
+		},
+		{
+			name:         "Example 3",
+			dependencies: map[string][]string{"a": {"b"}, "b": {"c"}, "c": {"a"}},
+			source:       "a",
+			target:       "b",
+			expected:     true,
+		},
+	}
+
+	for _, tc := range testCases {
+		fmt.Printf("--- Running Test Case: %s ---\n", tc.name)
+		fmt.Printf("Input: deps=%v, source=%s, target=%s\n", tc.dependencies, tc.source, tc.target)
+		actual := solution(tc.dependencies, tc.source, tc.target)
+		fmt.Printf("Expected: %v\n", tc.expected)
+		fmt.Printf("Actual:   %v\n", actual)
+		if reflect.DeepEqual(actual, tc.expected) {
+			fmt.Println("Result: PASS")
+		} else {
+			fmt.Println("Result: FAIL")
+		}
+		fmt.Println()
+	}
+}

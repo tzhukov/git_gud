@@ -33,3 +33,65 @@
 // - 1 <= availableCPU <= 10000
 // - 1 <= availableMemory <= 100000
 // - You cannot partially allocate a container
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func solution(cpu []int, memory []int, availableCPU int, availableMemory int) int {
+	// Your implementation will go here.
+	return 0
+}
+
+func main() {
+	testCases := []struct {
+		name            string
+		cpu             []int
+		memory          []int
+		availableCPU    int
+		availableMemory int
+		expected        int
+	}{
+		{
+			name:            "Example 1",
+			cpu:             []int{2, 3, 1, 4},
+			memory:          []int{4, 2, 1, 3},
+			availableCPU:    7,
+			availableMemory: 8,
+			expected:        3,
+		},
+		{
+			name:            "Example 2",
+			cpu:             []int{5, 5, 5},
+			memory:          []int{10, 10, 10},
+			availableCPU:    10,
+			availableMemory: 20,
+			expected:        2,
+		},
+		{
+			name:            "Example 3",
+			cpu:             []int{1, 1, 1},
+			memory:          []int{1, 1, 1},
+			availableCPU:    10,
+			availableMemory: 10,
+			expected:        3,
+		},
+	}
+
+	for _, tc := range testCases {
+		fmt.Printf("--- Running Test Case: %s ---\n", tc.name)
+		fmt.Printf("Input: cpu=%v, mem=%v, availCPU=%d, availMem=%d\n", tc.cpu, tc.memory, tc.availableCPU, tc.availableMemory)
+		actual := solution(tc.cpu, tc.memory, tc.availableCPU, tc.availableMemory)
+		fmt.Printf("Expected: %v\n", tc.expected)
+		fmt.Printf("Actual:   %v\n", actual)
+		if reflect.DeepEqual(actual, tc.expected) {
+			fmt.Println("Result: PASS")
+		} else {
+			fmt.Println("Result: FAIL")
+		}
+		fmt.Println()
+	}
+}

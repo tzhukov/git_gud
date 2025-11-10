@@ -32,3 +32,61 @@
 // - Requests are given in chronological order (sorted)
 // - 1 <= maxRequests <= 1000
 // - 1 <= windowSize <= 3600
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func solution(requests []int, maxRequests int, windowSize int) []bool {
+	// Your implementation will go here.
+	return nil
+}
+
+func main() {
+	testCases := []struct {
+		name        string
+		requests    []int
+		maxRequests int
+		windowSize  int
+		expected    []bool
+	}{
+		{
+			name:        "Example 1",
+			requests:    []int{1, 2, 3, 4, 5},
+			maxRequests: 3,
+			windowSize:  3,
+			expected:    []bool{true, true, true, false, false},
+		},
+		{
+			name:        "Example 2",
+			requests:    []int{1, 5, 9, 10},
+			maxRequests: 2,
+			windowSize:  5,
+			expected:    []bool{true, true, true, false},
+		},
+		{
+			name:        "Example 3",
+			requests:    []int{1, 10, 20},
+			maxRequests: 1,
+			windowSize:  5,
+			expected:    []bool{true, true, true},
+		},
+	}
+
+	for _, tc := range testCases {
+		fmt.Printf("--- Running Test Case: %s ---\n", tc.name)
+		fmt.Printf("Input: requests=%v, maxRequests=%d, windowSize=%d\n", tc.requests, tc.maxRequests, tc.windowSize)
+		actual := solution(tc.requests, tc.maxRequests, tc.windowSize)
+		fmt.Printf("Expected: %v\n", tc.expected)
+		fmt.Printf("Actual:   %v\n", actual)
+		if reflect.DeepEqual(actual, tc.expected) {
+			fmt.Println("Result: PASS")
+		} else {
+			fmt.Println("Result: FAIL")
+		}
+		fmt.Println()
+	}
+}
