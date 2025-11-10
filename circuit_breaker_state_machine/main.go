@@ -36,3 +36,61 @@
 // - 1 <= failureThreshold <= windowSize
 // - 1 <= windowSize <= 100
 // - For simplicity, ignore timeout transitions (focus on CLOSED/OPEN)
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func solution(requests []int, failureThreshold int, windowSize int) []string {
+	// Your implementation will go here.
+	return nil
+}
+
+func main() {
+	testCases := []struct {
+		name             string
+		requests         []int
+		failureThreshold int
+		windowSize       int
+		expected         []string
+	}{
+		{
+			name:             "Example 1",
+			requests:         []int{1, 1, 0, 0, 0, 1},
+			failureThreshold: 3,
+			windowSize:       5,
+			expected:         []string{"CLOSED", "CLOSED", "CLOSED", "CLOSED", "OPEN", "OPEN"},
+		},
+		{
+			name:             "Example 2",
+			requests:         []int{0, 0, 0, 1, 1, 1},
+			failureThreshold: 2,
+			windowSize:       3,
+			expected:         []string{"CLOSED", "CLOSED", "OPEN", "OPEN", "OPEN", "OPEN"},
+		},
+		{
+			name:             "Example 3",
+			requests:         []int{1, 1, 1, 1, 1},
+			failureThreshold: 3,
+			windowSize:       5,
+			expected:         []string{"CLOSED", "CLOSED", "CLOSED", "CLOSED", "CLOSED"},
+		},
+	}
+
+	for _, tc := range testCases {
+		fmt.Printf("--- Running Test Case: %s ---\n", tc.name)
+		fmt.Printf("Input: reqs=%v, threshold=%d, window=%d\n", tc.requests, tc.failureThreshold, tc.windowSize)
+		actual := solution(tc.requests, tc.failureThreshold, tc.windowSize)
+		fmt.Printf("Expected: %v\n", tc.expected)
+		fmt.Printf("Actual:   %v\n", actual)
+		if reflect.DeepEqual(actual, tc.expected) {
+			fmt.Println("Result: PASS")
+		} else {
+			fmt.Println("Result: FAIL")
+		}
+		fmt.Println()
+	}
+}

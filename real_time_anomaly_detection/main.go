@@ -33,3 +33,61 @@
 // - N < metrics.length
 // - 0.1 <= k <= 10.0
 // - Return empty array if there are fewer than N values to establish baseline
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func solution(metrics []int, N int, k float64) []int {
+	// Your implementation will go here.
+	return nil
+}
+
+func main() {
+	testCases := []struct {
+		name     string
+		metrics  []int
+		N        int
+		k        float64
+		expected []int
+	}{
+		{
+			name:     "Example 1",
+			metrics:  []int{10, 12, 11, 13, 12, 50, 11, 10},
+			N:        5,
+			k:        2.0,
+			expected: []int{5},
+		},
+		{
+			name:     "Example 2",
+			metrics:  []int{100, 102, 101, 103, 102, 104, 103},
+			N:        4,
+			k:        3.0,
+			expected: []int{},
+		},
+		{
+			name:     "Example 3",
+			metrics:  []int{5, 5, 5, 5, 100, 5, 5},
+			N:        3,
+			k:        1.5,
+			expected: []int{4},
+		},
+	}
+
+	for _, tc := range testCases {
+		fmt.Printf("--- Running Test Case: %s ---\n", tc.name)
+		fmt.Printf("Input: metrics=%v, N=%d, k=%.1f\n", tc.metrics, tc.N, tc.k)
+		actual := solution(tc.metrics, tc.N, tc.k)
+		fmt.Printf("Expected: %v\n", tc.expected)
+		fmt.Printf("Actual:   %v\n", actual)
+		if reflect.DeepEqual(actual, tc.expected) {
+			fmt.Println("Result: PASS")
+		} else {
+			fmt.Println("Result: FAIL")
+		}
+		fmt.Println()
+	}
+}

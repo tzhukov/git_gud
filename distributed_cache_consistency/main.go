@@ -37,3 +37,65 @@
 // - Operations: PUT, GET, INVALIDATE
 // - GET operations don't change state (read-only)
 // - For concurrent operations (same timestamp), use nodeId for tie-breaking (lexicographic)
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func solution(ops [][]any) map[string]string {
+	// Your implementation will go here.
+	return nil
+}
+
+func main() {
+	testCases := []struct {
+		name     string
+		ops      [][]any
+		expected map[string]string
+	}{
+		{
+			name: "Example 1",
+			ops: [][]any{
+				{1, "n1", "PUT", "k1", "v1"},
+				{2, "n2", "PUT", "k1", "v2"},
+				{3, "n1", "GET", "k1", nil},
+			},
+			expected: map[string]string{"k1": "v2"},
+		},
+		{
+			name: "Example 2",
+			ops: [][]any{
+				{1, "n1", "PUT", "k1", "v1"},
+				{2, "n2", "INVALIDATE", "k1", nil},
+				{3, "n3", "PUT", "k1", "v3"},
+			},
+			expected: map[string]string{"k1": "v3"},
+		},
+		{
+			name: "Example 3",
+			ops: [][]any{
+				{5, "n1", "PUT", "k1", "v5"},
+				{3, "n2", "PUT", "k1", "v3"},
+				{7, "n1", "INVALIDATE", "k1", nil},
+			},
+			expected: map[string]string{},
+		},
+	}
+
+	for _, tc := range testCases {
+		fmt.Printf("--- Running Test Case: %s ---\n", tc.name)
+		fmt.Printf("Input ops: %v\n", tc.ops)
+		actual := solution(tc.ops)
+		fmt.Printf("Expected: %v\n", tc.expected)
+		fmt.Printf("Actual:   %v\n", actual)
+		if reflect.DeepEqual(actual, tc.expected) {
+			fmt.Println("Result: PASS")
+		} else {
+			fmt.Println("Result: FAIL")
+		}
+		fmt.Println()
+	}
+}

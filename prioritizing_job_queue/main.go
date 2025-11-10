@@ -32,3 +32,56 @@
 // - 1 <= priority <= 10
 // - 0 <= arrivalTime <= 1000000 (timestamp in seconds)
 // - All jobIds are unique
+
+package main
+
+import (
+	"fmt"
+	"reflect"
+)
+
+func solution(jobs [][]int) []int {
+
+	r := []int{}
+
+	return r
+}
+
+func main() {
+	testCases := []struct {
+		name     string
+		jobs     [][]int
+		expected []int
+	}{
+		{
+			name:     "Example 1",
+			jobs:     [][]int{{1, 5, 100}, {2, 10, 101}, {3, 5, 102}},
+			expected: []int{2, 1, 3},
+		},
+		{
+			name:     "Example 2",
+			jobs:     [][]int{{1, 3, 50}, {2, 3, 60}, {3, 7, 55}},
+			expected: []int{3, 1, 2},
+		},
+		{
+			name:     "Example 3",
+			jobs:     [][]int{{1, 10, 100}},
+			expected: []int{1},
+		},
+	}
+
+	for _, tc := range testCases {
+		fmt.Printf("--- Running Test Case: %s ---\n", tc.name)
+		fmt.Printf("Input jobs: %v\n", tc.jobs)
+		actual := solution(tc.jobs)
+		fmt.Printf("Expected: %v\n", tc.expected)
+		fmt.Printf("Actual:   %v\n", actual)
+
+		if reflect.DeepEqual(actual, tc.expected) {
+			fmt.Println("Result: PASS")
+		} else {
+			fmt.Println("Result: FAIL")
+		}
+		fmt.Println()
+	}
+}
