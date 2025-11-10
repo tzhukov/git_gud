@@ -36,13 +36,57 @@
 package main
 
 import (
+	"container/heap"
 	"fmt"
 	"reflect"
 )
 
+type IntHeap [][]int
+
+func (h IntHeap) Len() int {
+	return len(h)
+}
+
+func (h IntHeap) Less(i, j int) bool {
+	return LessHelper(h[i], h[j])
+}
+func (h IntHeap) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+func (h *IntHeap) Push(x any) {
+	*h = append(*h, x.([]int))
+}
+func (h *IntHeap) Pop() any {
+	old := *h
+	n := len(old)
+	x := old[n-1]
+	*h = old[0 : n-1]
+	return x
+}
+
+func LessHelper(a, b []int) bool {
+	if a[1] > b[1] {
+		return true
+	} else if a[1] == b[1] {
+		return a[2] < b[2]
+	}
+	return false
+}
+
 func solution(jobs [][]int) []int {
+	pq := IntHeap{}
+	heap.Init(&pq)
 
 	r := []int{}
+
+	for _, job := range jobs {
+		heap.Push(&pq, job)
+		fmt.Println(pq)
+	}
+
+	for pq.Len() > 0 {
+		r = append(r, heap.Pop(&pq).([]int)[0])
+	}
 
 	return r
 }
