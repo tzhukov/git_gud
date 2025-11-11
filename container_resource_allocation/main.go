@@ -41,10 +41,58 @@ import (
 	"reflect"
 )
 
-func solution(cpu []int, memory []int, availableCPU int, availableMemory int) int {
-	// Your implementation will go here.
-	return 0
+type Problem struct {
+	Cpu             []int
+	Memory          []int
+	AvailableCPU    int
+	AvailableMemory int
 }
+
+func solution(cpu []int, memory []int, availableCPU int, availableMemory int) int {
+	return solutionTopDownMemoization(cpu, memory, availableCPU, availableMemory)
+}
+
+// Top-Down Memoization Approach, still working on the bottom-up tabulation
+func solutionTopDownMemoization(cpu []int, memory []int, availableCPU int, availableMemory int) int {
+	dp := make(map[int]map[int]map[int]int, availableCPU+1)
+
+	state := &Problem{cpu, memory, availableCPU, availableMemory}
+	// Your implementation will go here.
+	return recourse(state, 0, 0, 0, &dp)
+}
+
+func recourse(state *Problem, usedCpu, usedRam, index int, dp *map[int]map[int]map[int]int) int {
+
+	if index == len(state.Cpu) {
+		return 0
+	}
+
+	pick := 0
+
+	if v, ok := (*dp)[usedCpu][usedRam][index]; ok {
+		return v
+	}
+
+	if usedCpu+state.Cpu[index] <= state.AvailableCPU && usedRam+state.Memory[index] <= state.AvailableMemory {
+		pick = 1 + recourse(state, usedCpu+state.Cpu[index], usedRam+state.Memory[index], index+1, dp)
+	}
+
+	notPick := recourse(state, usedCpu, usedRam, index+1, dp)
+
+	if _, ok := (*dp)[usedCpu]; !ok {
+		(*dp)[usedCpu] = make(map[int]map[int]int)
+	}
+	if _, ok := (*dp)[usedCpu][usedRam]; !ok {
+		(*dp)[usedCpu][usedRam] = make(map[int]int)
+	}
+	if _, ok := (*dp)[usedCpu][usedRam][index]; !ok {
+		(*dp)[usedCpu][usedRam][index] = max(pick, notPick)
+	}
+
+	return (*dp)[usedCpu][usedRam][index]
+}
+
+//
 
 func main() {
 	testCases := []struct {
