@@ -81,7 +81,6 @@ func solution(jobs [][]int) []int {
 
 	for _, job := range jobs {
 		heap.Push(&pq, job)
-		fmt.Println(pq)
 	}
 
 	for pq.Len() > 0 {

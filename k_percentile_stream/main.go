@@ -1,3 +1,10 @@
+//
+// Solving k-th percentile problem in a streaming fashion using a min-heap.
+//
+// The closer the percentile to 100, the smaller the heap needs to be, it can be inverted for less than 50th percentiles.
+//
+// Benefit of the algorithm is that it can accumulate data as it goes along.
+
 package main
 
 import (
